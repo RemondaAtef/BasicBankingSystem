@@ -15,9 +15,20 @@
         }],
         "columns": [
             {
+                "name": "AccountNumber",
+                "data": "accountNumber",
+                "autowidth": true
+            },
+            {
                 "name": "Name",
                 "data": "name",
                 "autowidth": true
+            },
+            {
+                "render": function (data, type, row) {
+                    return '<img src=' +row.image + '}>' 
+                },
+                "orderable": false
             },
             {
                 "name": "Email",
@@ -31,7 +42,7 @@
             },
             {
                 "render": function (data, type, row) {
-                    return '<a href=customer/details=' + row.id + ' class="btn btn-primary"  > Details </a>'
+                    return '<a href=customer/details?Id=' + row.id + ' class="btn btn-primary"  > Details </a>'
                 },
                 "orderable": false
             },

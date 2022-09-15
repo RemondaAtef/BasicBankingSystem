@@ -24,6 +24,10 @@ namespace BankingSystem.Models
         {
             modelBuilder.Entity<Customers>(entity =>
             {
+                entity.Property(e => e.AccountNumber).HasMaxLength(50);
+
+                entity.Property(e => e.Balance).HasColumnType("money");
+
                 entity.Property(e => e.Email).HasMaxLength(100);
 
                 entity.Property(e => e.Name).HasMaxLength(50);

@@ -1,4 +1,5 @@
 ﻿using BankingSystem.Manger;
+using BankingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingSystem.Controllers
@@ -19,10 +20,20 @@ namespace BankingSystem.Controllers
 
 
         [HttpGet]
-        public IActionResult list()
+        public IActionResult details(int Id)
         {
-            var Customers = customerManger.GetAllCustomers();
-            return new JsonResult(Customers);
+            var CustomerDetails = customerManger.SearchCustomerById(Id);
+            return View(CustomerDetails);
+        }
+        [HttpPost]
+        public IActionResult details(Customers SenderDetails, string ReciverAccountNumber , decimal AmountOfMoney)
+        {
+            return View();
+        }
+        public IActionResult SearchCustomerByAccountNumber(string AccountNumber)
+        {
+            var Account_Number = customerManger.SearchCustomerByAccountNumber(AccountNumber);
+            return Json(Account_Number);
         }
     }
 }

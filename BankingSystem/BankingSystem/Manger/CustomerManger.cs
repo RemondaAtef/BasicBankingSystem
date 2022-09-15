@@ -22,7 +22,21 @@ namespace BankingSystem.Manger
             {
                 return CustomerRepo.GetAll();
             }
-            return CustomerRepo.GetMany(cus => cus.Name.Contains(searchValue) || cus.Email.Contains(searchValue) || cus.Balance == Convert.ToInt64(searchValue));
+            return CustomerRepo.GetMany(cus => cus.Name.Contains(searchValue) || cus.Email.Contains(searchValue)  || cus.AccountNumber.Contains(searchValue) );
         }
+        public Customers SearchCustomerById(int Id)
+        {
+            return CustomerRepo.Get(Id);    
+        }
+        public Customers SearchCustomerByAccountNumber(string AccountNumber)
+        {
+            var customer = CustomerRepo.GetOne(Customer=>Customer.AccountNumber.Equals(AccountNumber));
+            if(customer != null)
+                return customer;
+
+            var NotFoundCustomer = new Customers { Email = "Customer not found"  };
+            return NotFoundCustomer;
+        }
+         
     }
 }

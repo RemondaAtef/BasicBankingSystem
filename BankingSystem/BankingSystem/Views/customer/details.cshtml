@@ -1,0 +1,171 @@
+﻿@model BankingSystem.Models.Customers
+@{
+    ViewData["Title"] = "details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"></style>
+<style href="/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" type="text/css"></style>
+
+<!--search icon-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .input
+    {
+      background-color: white !important;
+      color: black !important;
+    }
+</style>
+
+<section id="contact" class="section-padding">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+
+                        <form name="sentMessage" class="contact-form" method="post" novalidate="">
+                            <h3>Customer Details</h3>
+                            <input type="hidden" asp-for="Id"/>
+                            <input type="hidden" asp-for="Image"/>
+                            <input type="hidden" asp-for="Name"/>
+                            <input type="hidden" asp-for="AccountNumber"/>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row control-group">
+                                        <div class="form-group col-xs-12 controls">
+                                            <center class="input">                                    
+                                                <img src="@Model.Image" />
+                                                <br />
+
+                                                <h4 style="margin-top:8px">@Model.Name</h4>
+                                            </center>
+                                        </div>
+                                       
+                                  
+                                </div>
+                                     </div>
+                               
+                                <div class="col-md-12">
+                                    <div class="row control-group">
+                                        <div class="form-group col-xs-12 controls">
+
+                                            <input type="text" class="form-control input" placeholder="Name" id="name" required="" asp-for="AccountNumber" readonly>
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row control-group">
+                                        <div class="form-group col-xs-12 controls">
+
+                                            <input type="email" class="form-control input" placeholder="Email Address" id="email" required="" data-validation-required-message="Please enter your email address."asp-for="Email" readonly>
+                                            <p class="help-block"></p>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12  controls">
+
+                                    <input type="text" class="form-control input" placeholder="Balance" id="phone" required="" data-validation-required-message="Please enter your phone number."asp-for="BalanceAfterEdit" readonly>
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                           
+                            <br>
+                            <h3>Send money</h3>
+                               <div class="row control-group">
+                                      <div class="form-group col-xs-10  controls">
+                                  
+                                          <input type="text" class="form-control " placeholder="Reciver AccountNumber" id="AccountNumber" name="ReciverAccountNumber" >
+                                          <p class="help-block"></p>
+                                          
+                                      </div>
+                                  <div class="input-group-append">
+                                      <button id="btnSearch" type="button" style="color:white" class="btn btn-white btn-lg"><i class="fa fa-search"></i></button>
+                                  </div>
+                               </div>
+
+                            <div id="success"></div>
+                            <div id="data"></div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section src="/bootstrap-select/js/bootstrap-select.js"></section>
+         @section AddFieldsscripts
+         {
+            <script type="text/javascript">
+                 // add row
+$("#btnSearch").click(function() {
+    if (!$("#customerEmail").is(":visible")) {
+        var html = '';
+        html += '<div class="row control-group">';
+        html += '<div class="form-group col-xs-12  controls">';
+        html += ' <input type="text" class="form-control input" placeholder="Customer Email Address" readonly id="customerEmail">';
+        html += '</div>';
+        html += '</div>';
+
+
+
+        $('#success').append(html);
+
+
+    }
+    var AccountNumber = $("#AccountNumber").val();
+    $.ajax({
+        url: "/customer/SearchCustomerByAccountNumber",
+        data: { AccountNumber: AccountNumber },
+        success: function(res) {
+            var customerEmail = res.email;
+            var customerName = res.name;
+                
+                     $("#customerEmail").val(customerEmail);
+                
+
+            if (!$("#customerName").is(":visible")) {
+                if (customerEmail != "Customer not found") {
+                    var html = '';
+                    html += '<div class="row control-group">';
+                    html += '<div class="form-group col-xs-12  controls">';
+                    html += ' <input type="text" class="form-control input" placeholder="customer Name" id="customerName"  readonly>';
+                    html += '</div>';
+                    html += '</div>';
+
+                    html += '<div class="row control-group">';
+                    html += '<div class="form-group col-xs-12  controls">';
+                    html += ' <input type="number" start="1000" step="1000" class="form-control " placeholder="Ammount of money" name="AmountOfMoney" required="" data-validation-required-message="Please enter ammount of money you want to send." >';
+                    html += '</div>';
+                    html += '</div>';
+
+                    html += '<div class="row control-group">';
+                    html += '<div class="form-group col-xs-12 text-right">';
+                    html += '<button type="submit" class="btn btn-white btn-lg">Send Money</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    $('#data').append(html);
+                    $("#customerName").val(customerName);
+                } 
+
+
+
+            }else {
+                      $("#data").remove();
+
+                }
+        }
+    });
+
+
+                 });
+
+    
+</script>
+         }
+                            

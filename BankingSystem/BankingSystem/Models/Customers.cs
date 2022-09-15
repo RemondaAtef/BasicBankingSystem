@@ -2,18 +2,17 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BankingSystem.Models
 {
     public partial class Customers
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="Name field is requird")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Email field is requird")]
-        [DataType(DataType.EmailAddress,ErrorMessage ="Email address not valid")]
         public string Email { get; set; }
-        public int? Balance { get; set; }
+        public decimal? Balance { get; set; }
+        public string AccountNumber { get; set; }
+        public string Image { get; set; }
+        public string BalanceAfterEdit { get { return "$" + Balance; } }
     }
 }
