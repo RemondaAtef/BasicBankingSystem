@@ -15,7 +15,6 @@ namespace BankingSystem.Manger
         {
             return CustomerRepo.GetAll().ToList();
         }
-
         public IQueryable<Customers> SearchCustomer(string searchValue)
         {
             if (string.IsNullOrEmpty(searchValue))
@@ -37,6 +36,26 @@ namespace BankingSystem.Manger
             var NotFoundCustomer = new Customers { Email = "Customer not found"  };
             return NotFoundCustomer;
         }
-         
+        public string SendMoney(Customers Sender,string ReciverAccountNumber, decimal AmmountOfMoney)
+        {
+            if (AmmountOfMoney == 0)
+                return "Not vaild ammount of money";
+
+
+            if (Sender.Balance < AmmountOfMoney)
+                return "Not enough money in your account";
+           
+            Sender.Balance -= AmmountOfMoney;
+            UpdateCustomer(Sender);
+            Customers Reciver = SearchCustomerByAccountNumber(ReciverAccountNumber);
+            Reciver.Balance += AmmountOfMoney;
+
+            return "transfered succesfully";
+
+        }
+        public void UpdateCustomer(Customers customer)
+        {
+            CustomerRepo.Edit(customer);
+        }
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yS1l3rI8xsbdpZr+wYia5geq+qC3K1cemj3jOnCXFOw=",
+  "Hash": "JSg7+ghKKg6pfo0upvbAmIj13eiIHzgPJfLy/eioeok=",
   "Source": "BankingSystem",
   "BasePath": "_content/BankingSystem",
   "Mode": "Default",
@@ -2871,6 +2871,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\work-9.jpg"
+    },
+    {
+      "Identity": "E:\\BankingSystem\\BankingSystem\\BankingSystem\\wwwroot\\js\\AddAjaxFieldsScript.js",
+      "SourceId": "BankingSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\BankingSystem\\BankingSystem\\BankingSystem\\wwwroot\\",
+      "BasePath": "_content/BankingSystem",
+      "RelativePath": "js/AddAjaxFieldsScript.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\AddAjaxFieldsScript.js"
     },
     {
       "Identity": "E:\\BankingSystem\\BankingSystem\\BankingSystem\\wwwroot\\js\\CustomerList.js",
